@@ -6,7 +6,7 @@ import tensorflow.keras as keras
 from keras import backend as K
 from keras import initializers
 from keras.models import Sequential, Model, load_model, save_model
-from keras.layers import Add, Embedding, Input, Reshape, Flatten
+from keras.layers import Add, Embedding, Input, Reshape, Flatten, Multiply
 from keras.layers.core import Dense, Lambda, Activation
 from keras.optimizers import Adagrad, Adam, SGD, RMSprop
 from keras.regularizers import l2
