@@ -49,7 +49,7 @@ def get_model(num_users, num_items, latent_dim, regs=[0,0]):
     user_latent = Flatten()(MF_Embedding_User(user_input))
     item_latent = Flatten()(MF_Embedding_Item(item_input))
     
-    predict_vector = Add()([user_latent, item_latent])
+    predict_vector = Multiply()([user_latent, item_latent])
     prediction = Dense(1, activation='sigmoid', kernel_initializer='lecun_uniform', name = 'prediction')(predict_vector)
     model = Model(inputs=[user_input, item_input], outputs=prediction)
     
