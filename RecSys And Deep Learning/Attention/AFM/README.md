@@ -13,17 +13,21 @@
 ## 模型介绍
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190915203052516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h4aWFvYmFpYg==,size_16,color_FFFFFF,t_70)
+
 从整体上看,AFM就是FM+Attention.,前面一部分embeding和pair-wise和FM模型的是类似的,然后后面加了个attention机制,就是AFM模型.
 
 首先看前面一部分.FM中特征的交互是'inner product',两个向量做内积,结果是一个值.而AFM中特征交互是'element-wise product',两个向量对应元素相乘,结果是向量:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190915202857832.png)
+
 然后给向量一个映射矩阵,对向量元素求和,得到交叉特征部分的预测结果,就是论文中的'sum pooling':
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2019091520290993.png)
+
 **这就是AFM和FM在特征交互不同的地方,p可以看成是sum pooling,也可以认为是embedding特征的权重矩阵,加上后文交互特征的attention权重,可以说比FM多了两层权重,一层区分交互特征重要性,一层区分embedding各维特征的重要性.从而大大提高了模型的拟合能力**.attention系数可以这样加上去:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190915202927896.png)
 
 aij可以直接通过最小化损失函数求得,但是当xi,xj没有共同出现时,是求不出对应的aij的.为了获得更加通用的模型,作者将attention score--aij进行参数化(有没有似曾相识,想想FM),并使用如下公式来定义:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190915203004980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h4aWFvYmFpYg==,size_16,color_FFFFFF,t_70)
+
 所以,最终模型的预测值可以表示为:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190915203014730.png)
 
