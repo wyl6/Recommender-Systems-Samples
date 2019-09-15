@@ -1,7 +1,10 @@
 ## 前言
 > 论文地址:https://arxiv.org/pdf/1601.02376.pdf
+
 > 论文开源代码(基于Theano实现):https://github.com/wnzhang/deep-ctr
+
 > 参考代码(无FM初始化):https://github.com/Sherryuu/CTR-of-deep-learning
+
 > 重构代码:https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/DNN/fnn
 
 
@@ -9,20 +12,32 @@
 ## FNN = FM+MLP
 ### FM在到底初始化什么
 FNN首先使用FM初始化输入embedding层,然后使用MLP来进行CTR预估,具体怎么做的呢?看论文中的一张图:
+
 ![Screenshot_2019-08-27_09-59-36.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_09-59-36.png)
+
 单看图来理解的有一定的迷惑性,加上z的输出结公式就更有迷惑性了:
+
 ![Screenshot_2019-08-27_10-01-44.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_10-01-44.png)
+
 其中wi为第i个field经FM初始化得到的一次项系数,vi就是隐向量,K为隐向量vi的维度.如果初始化的是z,那Dense Real Layer显示的结果显示每个field只有1个wi和vi,这不对啊,之前看FM的时候每个field的每个特征都对应一个wi和vi,这是怎么回事呢?实际上,FM初始化的是系数向量x到dense layer之间的权重矩阵W:
+
 ![Screenshot_2019-08-27_10-37-02.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_10-37-02.png)
+
 我给大家画张图,假设样本有3个field,3个field维度分别为N1,N2,N3,那我们经过FM初始化可以获得N=N1+N2+N3个隐向量和一次项系数w,用它们组成权重矩阵W0:
+
 ![Screenshot_2019-08-27_11-07-28.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_11-07-28.png)
+
 但是作者并没有直接将x和权重矩阵相乘来计算z,这样计算出的结果是K+1维,相当于把样本的所有非零特征对应的K+1维向量加起来.降维太过了,数据压缩太厉害总会损失一部分信息,因此作者将每个field分别相乘得到K+1维结果,最后把所有field的结果串联起来:
+
 ![Screenshot_2019-08-27_13-17-22.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_13-17-22.png)
+
 这样初始化时,由于样本每个field只有一个非零值,第i个field得到的z值就是非零特征对应的w和v:
+
 ![Screenshot_2019-08-27_10-01-44.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_10-01-44.png)
 
 ### FNN的流程
 了解FM初始化的是权重矩阵W0后,FNN流程就清楚了,从后往前看,一步到位:
+
 ![Screenshot_2019-08-27_10-09-21.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-08-27_10-09-21.png)
 
 
