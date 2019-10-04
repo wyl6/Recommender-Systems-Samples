@@ -8,6 +8,8 @@ Deep Interest Network(DIN) 是盖坤大神领导的阿里妈妈的精准定向�
 
 然后作者注意到,用户是否会点击推荐给他的物品,仅取决于历史行为的一部分,并称之为local activation.因此,计算推荐物品的点击率时,只有部分物品代表的兴趣分布真正在起作用.DIN正是通过使用attention机制,对不同推荐的物品,获得用户不同的特征表示,从而进行更加精确的CTR预估.
 
+论文链接：https://arxiv.org/pdf/1706.06978.pdf
+
 ## 1.模型分析
 ### 1.1 Baseline
 首先说一下，论文中使用Goods表示用户历史中的广告/商品，使用Ad代表候选广告/商品。
@@ -97,6 +99,8 @@ hist_emb = tf.concat(values=[
     tf.nn.embedding_lookup(cate_emb_w, h_c)        # [B, T, H/2]
 ], axis=2) # [B, T, H]
 ```
+上述实现我觉得有些问题。self.hist中除用户历史商品外其他都是0，也就是说几乎所有的用户都拥有第0个商品的embedding，由于在之前的DataInput函数预处理时恰好将包含0商品的记录全删掉了，此时0商品的embedding相当于对所有用户都添加了一个噪声，再加上attention机制，影响应该不大，但仍然有些问题。
+
 由behaviors中各goods的embedding获得user embedding：
 ```python
 # get user embedding vectors based on user hist vectors and item(to predict) vectors
@@ -120,9 +124,11 @@ d_layer_3_i = tf.reshape(d_layer_3_i, [-1]) # [B,]
 i_b = tf.gather(item_emb_b, self.item) # obtain bias of every item, [B,]
 self.pre = i_b+d_layer_3_i # [B]
 ```
+论文开源代码：https://github.com/zhougr1993/DeepInterestNetwork
 
 参考代码：https://github.com/Crawler-y/Deep-Interest-Network
-完整代码和数据：
+
+完整代码和数据：https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/Attention/DIN
 
 ## 参考
 [1] https://juejin.im/post/5b5591156fb9a04fe91a7a52
