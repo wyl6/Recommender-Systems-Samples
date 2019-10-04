@@ -1,6 +1,11 @@
+## 公众号
+关注公众号:**推荐算法工程师**,输入"进群",加入交流群,和小伙伴们一起讨论机器学习,深度学习,推荐算法.
+
+<img src="https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/deep_learning/dnn/tensorflow_mnist/wechat.jpg" width = "200" height = "200" />
+
 ## 前言
 
-Deep Interest Network(DIN) 是盖坤大神领导的阿里妈妈的精准定向检索及基础算法团队，在2017年6月提出的。这篇文章讨论的是电子商业中的CTR预估问题.重点是对用户的历史行为数据进行分析和挖掘.
+Deep Interest Network(DIN) 是盖坤大神领导的阿里妈妈的精准定向检索及基础算法团队提出的，发表在18年的ACM SIGKDD会议上。这篇文章讨论的是电子商业中的CTR预估问题.重点是对用户的历史行为数据进行分析和挖掘.
 
 论文指出,很多CTR预估的模型,比如Deep Cross Network,Wide&Deep Learning等,采用的都是一种相似的模型架构,首先使用Embedding&MLP 从高维稀疏输入中提取低维稠密vectors,然后使用Sum/Average Pooling等技巧获得定长vectors.然后使用MLP进行预测.但是这样做存在一些问题.
 
@@ -50,7 +55,7 @@ PRelu是一种常用的激活函数：
 
 我们知道，电商中的商品数据符合长尾分布，只有少量商品多次出现，大量商品只出现几次或不出现。因此User Behaviors很稀疏是肯定的，由于输入是高维系数特征，而模型又很复杂，参数太多，相当于复杂模型而数据不足，这种情况很容易过拟合。
 
-而对大体量的拥有上亿参数和非常稀疏的训练网络来说，直接应用L1,L2这种传统正则化方法是不使用的。比如L2正则化，在一个mini-batch中，只有非零特征对应的参数才会被更新，然而所有的参数都需要计算L2正则。
+而对大体量的拥有上亿参数和非常稀疏的训练网络来说，直接应用L1,L2这种传统正则化方法是不适用的。比如L2正则化，在一个mini-batch中，只有非零特征对应的参数才会被更新，然而所有的参数都需要计算L2正则。
 
 因此作者提出进行Mini-batch Aware正则化，只计算每个mini-batch中非零特征的相关参数：
 ![Screenshot_2019-10-03_22-03-17.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-10-03_22-03-17.png)
