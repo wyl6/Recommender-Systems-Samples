@@ -74,7 +74,7 @@ class AFM(BaseEstimator, TransformerMixin):
                 self.linear_part = tf.nn.embedding_lookup(self.weights['linear_w'],self.feature_index)  # [None, field_size, 1]
                 self.linear_part = tf.reduce_sum(tf.multiply(self.linear_part, feat_value), axis=2)  # [None, field_size]
                 self.linear_part = tf.nn.dropout(self.linear_part, self.dropout_keep_fm[0])  # [None, field_size]
-                self.linear_out = tf.reduce_sum(self.linear_part, axis=1, keep_dims=True) # [None, 1]
+                self.linear_out = tf.reduce_sum(self.linear_part, axis=1, keepdims=True) # [None, 1]
                 self.w0 = tf.multiply(self.biases['w0'], tf.ones_like(self.linear_out)) # [None, 1]
 
 #            with tf.name_scope('Pair-wise_Interaction_Layer'):
