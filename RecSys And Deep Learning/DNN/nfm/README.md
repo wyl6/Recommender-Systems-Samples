@@ -1,7 +1,9 @@
 # 基于深度学习的推荐(六)：CTR预估经典模型NFM
 
 ## 前言
-早期做特征工程的时候,采用人工或决策树等来选择特征,然而这些方法无法学习到训练集中没有出现的特征组合.而近几年出现的基于embedding的方法,可以学习到训练集中没有出现的组合,作者将embedding方法归为两类,一类是FM这种线性模型,之前介绍过的FNN就是利用FM作为初始化的embedding;另一类是基于神经网络的非线性模型,NFM(Neural Factorization Machine)则是将两种embedding结合起来.NFM是发表在SIGIR 2017上的文章,出现在深度学习与推荐系统结合的初期,模型相对较为简单,可以拿来练习tensorflow.论文地址:https://arxiv.org/pdf/1708.05027.pdf
+早期做特征工程的时候,采用人工或决策树等来选择特征,然而这些方法无法学习到训练集中没有出现的特征组合.而近几年出现的基于embedding的方法,可以学习到训练集中没有出现的组合,**作者将embedding方法归为两类,一类是FM这种线性模型,之前介绍过的FNN就是利用FM作为初始化的embedding;另一类是基于神经网络的非线性模型**,NFM(Neural Factorization Machine)则是将两种embedding结合起来.NFM是发表在SIGIR 2017上的文章,**出现在深度学习与推荐系统结合的初期,模型相对较为简单,可以拿来练习tensorflow**.
+
+论文地址:https://arxiv.org/pdf/1708.05027.pdf
 
 ## NFM模型
 首先来回顾下FM模型:
