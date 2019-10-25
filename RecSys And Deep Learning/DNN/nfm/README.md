@@ -1,7 +1,9 @@
 # 基于深度学习的推荐(六)：CTR预估经典模型NFM
 
 ## 前言
-早期做特征工程的时候,采用人工或决策树等来选择特征,然而这些方法无法学习到训练集中没有出现的特征组合.而近几年出现的基于embedding的方法,可以学习到训练集中没有出现的组合,**作者将embedding方法归为两类,一类是FM这种线性模型,之前介绍过的FNN就是利用FM作为初始化的embedding;另一类是基于神经网络的非线性模型**,NFM(Neural Factorization Machine)则是将两种embedding结合起来.NFM是发表在SIGIR 2017上的文章,**出现在深度学习与推荐系统结合的初期,模型相对较为简单,可以拿来练习tensorflow**.
+早期做特征工程的时候,采用人工或决策树等来选择特征,然而这些方法无法学习到训练集中没有出现的特征组合.而近几年出现的基于embedding的方法,可以学习到训练集中没有出现的组合,**作者将embedding方法归为两类,一类是FM这种线性模型,之前介绍过的FNN就是利用FM作为初始化的embedding;另一类是基于神经网络的非线性模型**.
+
+NFM(Neural Factorization Machine)则是将两种embedding结合起来.NFM是发表在SIGIR 2017上的文章,**出现在深度学习与推荐系统结合的初期,模型相对较为简单,可以拿来练习tensorflow**.
 
 论文地址:https://arxiv.org/pdf/1708.05027.pdf
 
@@ -12,10 +14,10 @@
 设embedding向量维度为k,其中的二阶交叉项可以进行优化:
 ![20190618160910.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/20190618160910.png)
 
-交叉项得到的是一个值,如果去掉最外面那层求和,得到一个k维的向量.这个k维的向量就是所谓的"Bi-Interaction Layer"的结果f(x):
+交叉项得到的是一个值,如果去掉最外面那层求和,得到一个k维的向量.这个k维的向量就是所谓的"Bi-Interaction Layer"的结果:
 
 ![Screenshot_2019-10-25_16-29-59.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-10-25_16-29-59.png)
-最终的预估公式就是:
+将这个向量输入全连接层,得到预测结果f(x),而最终的预估公式就是:
 ![Screenshot_2019-10-25_16-37-23.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2019-10-25_16-37-23.png)
 
 此时再看模型一目了然:
@@ -70,6 +72,4 @@ https://github.com/faychu/nfm/blob/master/NeuralFM.py
 https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/DNN/nfm
 
 ## 参考
-[1] https://arxiv.org/pdf/1708.05027.pdf
-
-[2] https://github.com/faychu/nfm/blob/master/NeuralFM.py
+https://arxiv.org/pdf/1708.05027.pdf
