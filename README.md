@@ -3,7 +3,7 @@
 ## Attention
 
 - AFM ---------------------[paper](https://www.ijcai.org/proceedings/2017/0435.pdf)/[code](https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/Attention/AFM)
-- DIN ---------------------[paper](ttps://arxiv.org/pdf/1706.06978.pdf)/[code](https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/Attention/DIN)
+- DIN ---------------------[paper](https://arxiv.org/pdf/1706.06978.pdf)/[code](https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/Attention/DIN)
 
 ## DNN
 - FNN ---------------------[paper](https://arxiv.org/pdf/1601.02376.pdf)/[code](https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/DNN/fnn)
