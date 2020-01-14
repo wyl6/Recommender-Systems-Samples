@@ -33,7 +33,8 @@ DeepFM将FM的embedding和DNN部分共享，什么意思呢？看过FNN模型的
 DNN这部分的计算就是常见的前向传播，假设有l层隐藏层，那么记a(0)为输入，则输出a(l+1)为：
 ![Screenshot_2020-01-13_19-33-12.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2020-01-13_19-33-12.png)
 
-然后把两者结合在一起，即FM+DNN=>DeepFM.
+然后把两者结合在一起，即FM+DNN=>DeepFM:
+
 ![deepfm.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/deepfm.png)
 
 
@@ -118,11 +119,15 @@ self.out = tf.add(tf.matmul(concat_input,self.weights['concat_projection']),self
 
 最后输出层的实现其实需要说道说道。两种模型输出结果的结合一般有两种方式，第一种是输出结果为概率值这种，将多个模型的结果加权，可以直接用w和1-w配置权重，也可以将两种概率结果concatenate，然后接个全连接层；第二种是输出结果是多维特征，此时最简单的方法是将特征串联，然后接几层全连接层进行计算。更深入的内容大家可以去看看多模态融合，跨模态检索，模型融合，集成学习这块。代码中用的是第二种。
 
-> 完整数据和代码：https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/DNN/deepfm
+>  完整数据和代码：https://github.com/wyl6/Recommender-Systems-Samples/tree/master/RecSys%20And%20Deep%20Learning/DNN/deepfm
+> 
 > 模型实现参考代码：https://github.com/ChenglongChen/tensorflow-DeepFM
+> 
 > 数据处理参考代码：https://github.com/princewen/tensorflow_practice/blob/master/recommendation/Basic-DeepFM-model/
 
 ## 参考
 [1] https://www.jianshu.com/p/63359e928b99
+
 [2] DeepFM: A Factorization-Machine based Neural Network for CTR Prediction
+
 [3] https://www.plob.org/article/12476.html
