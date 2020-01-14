@@ -24,10 +24,11 @@ DeepFM将FM的embedding和DNN部分共享，什么意思呢？看过FNN模型的
 
 ![fm.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/fm.png)
 
-首先看下FM部分,获得每个特征的隐向量,然后做二阶特征交叉(Inner Product).如果为离散特征,xj为1,连续特征,xj为特征值.从下图中我们可以看出FM其实就是一种特殊的embedding,将其用神经网络的形式展现了出来,实际上还是在做FM的事情:
+上图所示是FM部分,获得每个特征的隐向量,然后做二阶特征交叉(Inner Product).如果为离散特征,xj为1,连续特征,xj为特征值.从下图中我们可以看出FM其实就是一种特殊的embedding,将其用神经网络的形式展现了出来,实际上还是在做FM的事情:
 ![Screenshot_2020-01-12_22-18-17.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/Screenshot_2020-01-12_22-18-17.png)
 
-然后就是DNN部分，中间是几层神经网络，输入的Dense Embeddings就是FM的隐向量，这里就是DeepFM所谓的共享。
+然后就是下图所示的DNN部分，中间是几层神经网络，输入的Dense Embeddings就是FM的隐向量，这里就是DeepFM所谓的共享。
+
 ![dnn.png](https://raw.githubusercontent.com/wyl6/wyl6.github.io/master/imgs_for_blogs/dnn.png)
 
 DNN这部分的计算就是常见的前向传播，假设有l层隐藏层，那么记a(0)为输入，则输出a(l+1)为：
